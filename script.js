@@ -1,86 +1,105 @@
 
 
     
-var input = prompt("rock, paper or scissors?");
-var computer = computerPlay();
-var player = playerChoice(input);
-var processed = processChoices(player, computer);
-var result = determineWinner();
-let playerCount = null;
-let computerCount = null;
+//var input = prompt("rock, paper or scissors?");
+let playerCount = 0;
+let computerCount = 0;
+var game = function(){
+    determineWinner();
+}
 
-function computerPlay(){
+var computerPlay = function(){
     var choice = Math.floor((Math.random() * 3) + 1);
     switch(choice) {
         case 1:
-        var stringChoice = 'rock';
+        var stringChoice = 'rock'
+        break;
         case 2:
-        var stringChoice = 'paper';
+        var stringChoice = 'paper'
+        break;
         case 3:
-        var stringChoice = 'scissors';
+        var stringChoice = 'scissors'
+        break;
         default:
         console.log('something went terribly wrong with objectifying');
             break;
     }
-    console.log(`Computer play completed with the choice being ${stringChoice}`)
+    console.log(`Computer chose ${stringChoice}`)
     return stringChoice; 
        
 };
-function playerChoice(input){
+var playerChoice = function (){
+    var input= prompt("rock, paper or scissors?");
     safetext = input.toLowerCase().trim();
-    console.log(input + 'is a' + typeof input);
+    //console.log(input + 'is a' + typeof input);
     return safetext
 }
-function processChoices(player, computer){
+var processChoices = function (player, computer){
+    var winner = 0;
     switch (player) {
-        case player == 'rock':
+        case computer:
+            if (player == computer) {
+                winner = 3
+            }
+            break;
+        case 'rock':
             if (computer == 'paper'){
-                var winner = 2; 
+                winner = 2; 
             } else if (computer == 'scissors'){
-                var winner = 1; 
+                winner = 1; 
             }
             break;
-        case player == 'paper':
+        case 'paper':
             if (computer == 'scissors'){
-                var winner = 2;
+                winner = 2;
             } else if (computer == 'rock'){
-                var winner = 1;
+                winner = 1;
             }
             break;
-        case player == 'scissors':
+        case 'scissors':
             if (computer == 'rock'){
-                var winner = 2;
+                winner = 2;
             } else if (computer == 'paper'){
-                var winner = 1;
+                winner = 1;
             }
-            break;
-        default:
-            if (computer == player){
-        var winner = console.log('We have a tie, go again!');
-            } 
             break;
     }
     return winner
 }
 
-function determineWinner(){
-    var message = (processed == 2) ? `The computer wins! ${computer} beats ${player}!` : `The player wins! ${player} beats ${computer}!`;
-    console.log(message);
-    
+var determineWinner = function (){
+    var computer = computerPlay();
+    var player = playerChoice();
+    var processed = processChoices(player, computer);
+
+    switch (processed) {
+        case 1:
+        console.log(`The player wins! ${player} beats ${computer}!`);
+        playerCount += 1
+        break;
+        case 2: 
+        console.log(`The computer wins! ${computer} beats ${player}!`);
+        computerCount += 1;
+        break;
+        case 3:
+    console.log(`We have a tie, go again!`);    
+        break;
+}   
+console.log(`Player ${playerCount}; Computer ${computerCount}`);
+
+}
+var determineFinalist = function (playerCount, computerCount){
+if (playerCount > computerCount) {
+        console.log('Player beats computer');
+} else if (playerCount < computerCount) {
+    console.log('Computer beats player');
+} else if (playerCount == computerCount) {
+    console.log('We have a tie! Go again!');
+}
 }
 
 for (i = 0; i < 5; i++) {
-    if (playerCount + computerCount >= 5) {
-if (playerCount > computer){
-    console.log('Player beats computer');
-} else {
-    console.log('Computer beats player');
-}
-    } else {
-        prompt("rock, paper or scissors?");
-        computerPlay();
-        playerChoice(input);
-        processChoices(player, computer);
-        determineWinner();
-    }
-  }
+        game();
+    } 
+determineFinalist (playerCount, computerCount);
+  
