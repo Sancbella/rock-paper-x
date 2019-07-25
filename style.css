@@ -1,0 +1,23 @@
+.verdict {
+background: aqua;
+}
+
+.verdict .win {
+    background: lightgreen;
+}
+
+.verdict .lose {
+    background:lightcoral ;
+}
+.verdict .tie {
+    background:gray ;
+    color: aliceblue;
+}
+
+.grey {
+color: gray;
+}
+
+.restart{
+color: red;
+}
